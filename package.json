@@ -1,0 +1,29 @@
+{
+  "name": "kismatch",
+  "version": "0.0.1",
+  "description": "Functions with pattern-matching",
+  "main": "build/index.js",
+  "scripts": {
+    "deploy": "babel src --out-file build/index.js --stage 1 --optional runtime",
+    "test": "mocha --watch --compilers js:babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbarr/kismatch.git"
+  },
+  "keywords": [
+    "pattern-matching",
+    "es7",
+    "es7",
+    "javascript"
+  ],
+  "author": "Brendan Barr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bbarr/kismatch/issues"
+  },
+  "homepage": "https://github.com/bbarr/kismatch#readme",
+  "dependencies": {
+    "kisschema": "^1.0.0"
+  }
+}

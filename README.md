@@ -1,2 +1,4 @@
 # kismatch
-Creates functions that pattern-match their parameters
+Functions with pattern-matching
+
+
