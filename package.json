@@ -1,6 +1,6 @@
 {
   "name": "kismatch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Functions with pattern-matching",
   "main": "build/index.js",
   "scripts": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/bbarr/kismatch#readme",
   "dependencies": {
+    "babel-runtime": "^5.8.29",
     "kisschema": "^1.0.0"
   }
 }
