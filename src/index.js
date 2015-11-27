@@ -23,7 +23,7 @@ var test = (pattern, data) => {
   for (var key in pattern) {
     if (pattern.hasOwnProperty(key)) {
       if (isFunction(pattern[key].validate)) {
-        if (!pattern[key].validate(data[key])) {
+        if (validate({ [key]: pattern[key] }, { [key]: data[key] })) {
           return 0
         }
       } else if (pattern[key] !== data[key]) return 0

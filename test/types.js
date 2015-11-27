@@ -58,6 +58,21 @@ describe('kismatch', () => {
     })
   })
 
+  describe('works on isRequired', () => {
+
+    it ('should check both isRequired and base validation', () => {
+
+      var echo = km(
+        { foo: km.types.string.isRequired },
+        payload => payload
+      )
+
+      var bad = { foo: 1 }
+
+      assert.equal(echo(bad), null)
+    })
+  })
+
   describe('multiple matchers', () => {
 
     it ('should run function when matches multiple', () => {

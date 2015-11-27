@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _kisschema = require('kisschema');
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var resolver = function resolver(data) {
   return new Promise(function (res) {
     return res(data);
@@ -49,7 +51,7 @@ var test = function test(pattern, data) {
   for (var key in pattern) {
     if (pattern.hasOwnProperty(key)) {
       if (isFunction(pattern[key].validate)) {
-        if (!pattern[key].validate(data[key])) {
+        if ((0, _kisschema.validate)(_defineProperty({}, key, pattern[key]), _defineProperty({}, key, data[key]))) {
           return 0;
         }
       } else if (pattern[key] !== data[key]) return 0;
