@@ -101,4 +101,22 @@ describe('kismatch', () => {
       assert.equal(JSON.stringify(echo(good)), JSON.stringify([ good, good ]))
     })
   })
+
+  describe('default function', () => {
+
+    it ('should call a given default function if no other matches found', () => {
+
+      var echo = km(
+
+        { foo: km.types.number, bar: 'baz' },
+        payload => payload,
+
+        () => 'some default'
+      )
+
+      var needsDefault = { foo: 1 }
+
+      assert.equal(echo(needsDefault), 'some default')
+    })
+  })
 })

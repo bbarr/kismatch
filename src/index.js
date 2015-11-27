@@ -6,6 +6,7 @@ var rejector = data => new Promise(_, rej => rej(data))
 var isOdd = n => n % 2
 var last = arr => arr[arr.length - 1]
 var first = arr => arr[0]
+var init = arr => arr.slice(0, arr.length - 1)
 var isFunction = x => typeof x === 'function'
 var max = arr => arr.reduce((x, y) => x > y ? x : y, 0)
 
@@ -34,14 +35,18 @@ var test = (pattern, data) => {
 
 var api = (...args) => {
 
-  var pairs = toPairs(args)
+  var groups = toPairs(args)
+  var hasDefault = last(groups).length === 1
+  var pairs = hasDefault ? init(groups) : groups
+  var defaultFn = hasDefault ? last(last(groups)) : null
 
   return (payload) => {
 
     var scores = pairs.map(pair => test(first(pair), payload))
 
     var maxScore = max(scores)
-    if (maxScore === 0) return null
+    if (maxScore === 0) 
+      return defaultFn && defaultFn(payload)
 
     var indexOfBest = scores.indexOf(maxScore)
     var best = pairs[indexOfBest]

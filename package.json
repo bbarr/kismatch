@@ -1,11 +1,11 @@
 {
   "name": "kismatch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Functions with pattern-matching",
   "main": "build/index.js",
   "scripts": {
-    "deploy": "babel src --out-file build/index.js --stage 1 --optional runtime",
-    "test": "mocha --watch --compilers js:babel/register"
+    "build": "babel src --out-file build/index.js",
+    "test": "mocha --watch --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,9 @@
   "dependencies": {
     "babel-runtime": "^5.8.29",
     "kisschema": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.2.1",
+    "babel-preset-es2015": "^6.1.18"
   }
 }
