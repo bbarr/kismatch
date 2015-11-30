@@ -8,6 +8,9 @@ var _kisschema = require('kisschema');
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var is = function is(typeName, x) {
+  return toString.call(x) === '[object ' + typeName + ']';
+};
 var resolver = function resolver(data) {
   return new Promise(function (res) {
     return res(data);
@@ -48,13 +51,20 @@ var toPairs = function toPairs(arr) {
 
 var test = function test(pattern, data) {
   var count = 0;
+  if (isFunction(pattern)) {
+    return pattern(data) ? 1 : 0;
+  }
   for (var key in pattern) {
     if (pattern.hasOwnProperty(key)) {
       if (isFunction(pattern[key].validate)) {
         if ((0, _kisschema.validate)(_defineProperty({}, key, pattern[key]), _defineProperty({}, key, data[key]))) {
           return 0;
         }
-      } else if (pattern[key] !== data[key]) return 0;
+      } else {
+        if (is('Object', pattern[key])) {
+          return test(pattern[key], data[key]);
+        } else if (pattern[key] !== data[key]) return 0;
+      }
       count++;
     }
   }
