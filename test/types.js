@@ -188,4 +188,19 @@ describe('kismatch', () => {
       assert.equal(echo(bad), null)
     })
   })
+
+  describe('matched function execution', () => {
+
+    it ('should call function with all given arguments!', () => {
+
+      var echo = km(
+        { foo: km.types.string, bar: 2 },
+        (...args) => args
+      )
+
+      var good = { foo: 'hi', bar: 2 }
+
+      assert.deepEqual(echo(good, 1, 2, 3, 4, 5), [ good, 1, 2, 3, 4, 5 ])
+    })
+  })
 })

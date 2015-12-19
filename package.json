@@ -1,6 +1,6 @@
 {
   "name": "kismatch",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Functions with pattern-matching",
   "main": "build/index.js",
   "scripts": {

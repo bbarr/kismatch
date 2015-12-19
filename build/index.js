@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _kisschema = require('kisschema');
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var is = function is(typeName, x) {
@@ -82,6 +84,9 @@ var api = function api() {
   var defaultFn = hasDefault ? last(last(groups)) : null;
 
   return function (payload) {
+    for (var _len2 = arguments.length, extraPayload = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      extraPayload[_key2 - 1] = arguments[_key2];
+    }
 
     var scores = pairs.map(function (pair) {
       return test(first(pair), payload);
@@ -93,7 +98,7 @@ var api = function api() {
     var indexOfBest = scores.indexOf(maxScore);
     var best = pairs[indexOfBest];
 
-    return last(best)(payload);
+    return last(best).apply(undefined, _toConsumableArray([payload].concat(extraPayload)));
   };
 };
 

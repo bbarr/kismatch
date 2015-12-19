@@ -48,7 +48,7 @@ var api = (...args) => {
   var pairs = hasDefault ? init(groups) : groups
   var defaultFn = hasDefault ? last(last(groups)) : null
 
-  return (payload) => {
+  return (payload, ...extraPayload) => {
 
     var scores = pairs.map(pair => test(first(pair), payload))
 
@@ -59,7 +59,7 @@ var api = (...args) => {
     var indexOfBest = scores.indexOf(maxScore)
     var best = pairs[indexOfBest]
 
-    return last(best)(payload)
+    return last(best)(...[ payload ].concat(extraPayload))
   }
 }
 
