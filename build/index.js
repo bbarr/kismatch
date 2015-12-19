@@ -88,17 +88,23 @@ var api = function api() {
       extraPayload[_key2 - 1] = arguments[_key2];
     }
 
+    var payloadArgs = [payload].concat(extraPayload);
+
+    if (!payload) {
+      return defaultFn ? defaultFn.apply(undefined, _toConsumableArray(payloadArgs)) : null;
+    }
+
     var scores = pairs.map(function (pair) {
       return test(first(pair), payload);
     });
 
     var maxScore = max(scores);
-    if (maxScore === 0) return defaultFn && defaultFn(payload);
+    if (maxScore === 0) return defaultFn && defaultFn.apply(undefined, _toConsumableArray(payloadArgs));
 
     var indexOfBest = scores.indexOf(maxScore);
     var best = pairs[indexOfBest];
 
-    return last(best).apply(undefined, _toConsumableArray([payload].concat(extraPayload)));
+    return last(best).apply(undefined, _toConsumableArray(payloadArgs));
   };
 };
 

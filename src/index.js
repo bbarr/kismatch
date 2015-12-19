@@ -50,16 +50,22 @@ var api = (...args) => {
 
   return (payload, ...extraPayload) => {
 
+    var payloadArgs = [ payload ].concat(extraPayload)
+
+    if (!payload) {
+      return defaultFn ? defaultFn(...payloadArgs) : null
+    }
+
     var scores = pairs.map(pair => test(first(pair), payload))
 
     var maxScore = max(scores)
     if (maxScore === 0) 
-      return defaultFn && defaultFn(payload)
+      return defaultFn && defaultFn(...payloadArgs)
 
     var indexOfBest = scores.indexOf(maxScore)
     var best = pairs[indexOfBest]
 
-    return last(best)(...[ payload ].concat(extraPayload))
+    return last(best)(...payloadArgs)
   }
 }
 

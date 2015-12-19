@@ -29,6 +29,18 @@ describe('kismatch', () => {
 
       assert.equal(echo(bad), null)
     })
+
+    it ('should not break when given undefined/null', () => {
+
+      var echo = km(
+        { foo: 'bar' },
+        payload => payload
+      )
+
+      var bad = undefined
+
+      assert.equal(echo(bad), null)
+    })
   })
 
   describe('kisschema examples', () => {
@@ -199,6 +211,19 @@ describe('kismatch', () => {
       )
 
       var good = { foo: 'hi', bar: 2 }
+
+      assert.deepEqual(echo(good, 1, 2, 3, 4, 5), [ good, 1, 2, 3, 4, 5 ])
+    })
+
+    it ('should call default function with all given arguments', () => {
+
+      var echo = km(
+        { foo: km.types.string, bar: 2 },
+        () => false,
+        (...args) => args
+      )
+
+      var good = undefined
 
       assert.deepEqual(echo(good, 1, 2, 3, 4, 5), [ good, 1, 2, 3, 4, 5 ])
     })
