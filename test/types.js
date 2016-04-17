@@ -199,6 +199,18 @@ describe('kismatch', () => {
 
       assert.equal(echo(bad), null)
     })
+
+    it ('should simply fail if data is not nested', () => {
+
+      var echo = km(
+        { foo: { bar: { zap: 1 } } },
+        payload => payload
+      )
+
+      var bad = { foo: null }
+
+      assert.equal(echo(bad), null)
+    })
   })
 
   describe('matched function execution', () => {
