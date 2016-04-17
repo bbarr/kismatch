@@ -211,6 +211,21 @@ describe('kismatch', () => {
 
       assert.equal(echo(bad), null)
     })
+
+    it ('should match for multiple nested patterns', () => {
+
+      var echo = km(
+        { 
+          foo: { bar: 'baz' },
+          zap: { pip: 1 }
+        },
+        payload => payload
+      )
+
+      var bad = { foo: { bar: 'baz' }, zap: {} }
+
+      assert.equal(echo(bad), null)
+    })
   })
 
   describe('matched function execution', () => {

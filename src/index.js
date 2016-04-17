@@ -33,7 +33,9 @@ var test = (pattern, data) => {
       } else {
         if (is('Object', pattern[key])) {
           if (!data[key]) return 0
-          return test(pattern[key], data[key])
+          let sub = test(pattern[key], data[key])
+          if (sub === 0) return 0
+          else count++
         } else if (pattern[key] !== data[key]) return 0
       }
       count++
