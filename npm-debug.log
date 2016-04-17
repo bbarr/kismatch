@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/bbarr/.nvm/versions/node/v5.7.1/bin/node',
+1 verbose cli   '/Users/bbarr/.nvm/versions/node/v5.7.1/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.6.0
+3 info using node@v5.7.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/bbarr/web/kismatch',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/bbarr/.npm/kismatch/0.0.8/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/bbarr/.npm correctMkdir not in flight; initializing
+10 info lifecycle kismatch@0.0.8~prepublish: kismatch@0.0.8
+11 silly lifecycle kismatch@0.0.8~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/bbarr/.npm/kismatch/0.0.8/package.tgz',
+12 verbose tar pack   '/Users/bbarr/web/kismatch' ]
+13 verbose tarball /Users/bbarr/.npm/kismatch/0.0.8/package.tgz
+14 verbose folder /Users/bbarr/web/kismatch
+15 verbose addLocalTarball adding from inside cache /Users/bbarr/.npm/kismatch/0.0.8/package.tgz
+16 verbose correctMkdir /Users/bbarr/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd kismatch@0.0.8
+18 verbose afterAdd /Users/bbarr/.npm/kismatch/0.0.8/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/bbarr/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/bbarr/.npm/kismatch/0.0.8/package/package.json written
+21 silly publish { name: 'kismatch',
+21 silly publish   version: '0.0.8',
+21 silly publish   description: 'Functions with pattern-matching',
+21 silly publish   main: 'build/index.js',
+21 silly publish   scripts:
+21 silly publish    { build: 'babel src --out-file build/index.js',
+21 silly publish      test: 'mocha --watch --compilers js:babel-core/register' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/bbarr/kismatch.git' },
+21 silly publish   keywords: [ 'pattern-matching', 'es7', 'es7', 'javascript' ],
+21 silly publish   author: { name: 'Brendan Barr' },
+21 silly publish   license: 'ISC',
+21 silly publish   bugs: { url: 'https://github.com/bbarr/kismatch/issues' },
+21 silly publish   homepage: 'https://github.com/bbarr/kismatch#readme',
+21 silly publish   dependencies: { 'babel-runtime': '^5.8.29', kisschema: '^1.0.0' },
+21 silly publish   devDependencies: { 'babel-core': '^6.2.1', 'babel-preset-es2015': '^6.1.18' },
+21 silly publish   readme: '# kismatch\nFunctions with pattern-matching\n\n\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: 'd1dd93dd64a12912ee535f27aefc0a5cd6ece2dd',
+21 silly publish   _id: 'kismatch@0.0.8',
+21 silly publish   _shasum: '80e01a715725dbc1d1437063915ac9ad9805df01',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name kismatch
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry uri https://registry.npmjs.org/kismatch
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading /Users/bbarr/.npm/kismatch/0.0.8/package.tgz
+29 verbose request uri https://registry.npmjs.org/kismatch
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 1:49:49 PM
+32 verbose request using bearer token for auth
+33 verbose request id 27f403e26c18f5e4
+34 http request PUT https://registry.npmjs.org/kismatch
+35 http 403 https://registry.npmjs.org/kismatch
+36 verbose headers { 'content-type': 'application/json',
+36 verbose headers   'cache-control': 'max-age=300',
+36 verbose headers   'content-length': '95',
+36 verbose headers   'accept-ranges': 'bytes',
+36 verbose headers   date: 'Sun, 17 Apr 2016 11:49:50 GMT',
+36 verbose headers   via: '1.1 varnish',
+36 verbose headers   connection: 'keep-alive',
+36 verbose headers   'x-served-by': 'cache-fra1236-FRA',
+36 verbose headers   'x-cache': 'MISS',
+36 verbose headers   'x-cache-hits': '0',
+36 verbose headers   'x-timer': 'S1460893789.437355,VS0,VE1429',
+36 verbose headers   vary: 'Accept-Encoding' }
+37 verbose request invalidating /Users/bbarr/.npm/registry.npmjs.org/kismatch on PUT
+38 error publish Failed PUT 403
+39 verbose stack Error: "You cannot publish over the previously published version 0.0.8." : kismatch
+39 verbose stack     at makeError (/Users/bbarr/.nvm/versions/node/v5.7.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (/Users/bbarr/.nvm/versions/node/v5.7.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+39 verbose stack     at Request._callback (/Users/bbarr/.nvm/versions/node/v5.7.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+39 verbose stack     at Request.self.callback (/Users/bbarr/.nvm/versions/node/v5.7.1/lib/node_modules/npm/node_modules/request/request.js:198:22)
+39 verbose stack     at emitTwo (events.js:100:13)
+39 verbose stack     at Request.emit (events.js:185:7)
+39 verbose stack     at Request.<anonymous> (/Users/bbarr/.nvm/versions/node/v5.7.1/lib/node_modules/npm/node_modules/request/request.js:1035:10)
+39 verbose stack     at emitOne (events.js:95:20)
+39 verbose stack     at Request.emit (events.js:182:7)
+39 verbose stack     at IncomingMessage.<anonymous> (/Users/bbarr/.nvm/versions/node/v5.7.1/lib/node_modules/npm/node_modules/request/request.js:962:12)
+40 verbose statusCode 403
+41 verbose pkgid kismatch
+42 verbose cwd /Users/bbarr/web/kismatch
+43 error Darwin 15.4.0
+44 error argv "/Users/bbarr/.nvm/versions/node/v5.7.1/bin/node" "/Users/bbarr/.nvm/versions/node/v5.7.1/bin/npm" "publish"
+45 error node v5.7.1
+46 error npm  v3.6.0
+47 error code E403
+48 error "You cannot publish over the previously published version 0.0.8." : kismatch
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
