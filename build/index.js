@@ -64,6 +64,7 @@ var test = function test(pattern, data) {
         }
       } else {
         if (is('Object', pattern[key])) {
+          if (!data[key]) return 0;
           return test(pattern[key], data[key]);
         } else if (pattern[key] !== data[key]) return 0;
       }
