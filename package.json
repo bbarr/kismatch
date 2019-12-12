@@ -1,11 +1,11 @@
 {
+  "type": "module",
   "name": "kismatch",
-  "version": "0.0.83",
+  "version": "1.0.0",
   "description": "Functions with pattern-matching",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "babel src --out-file build/index.js",
-    "test": "mocha --watch --compilers js:babel-core/register"
+    "test": "node test/types.js"
   },
   "repository": {
     "type": "git",
@@ -13,8 +13,6 @@
   },
   "keywords": [
     "pattern-matching",
-    "es7",
-    "es7",
     "javascript"
   ],
   "author": "Brendan Barr",
@@ -23,13 +21,6 @@
     "url": "https://github.com/bbarr/kismatch/issues"
   },
   "homepage": "https://github.com/bbarr/kismatch#readme",
-  "dependencies": {
-    "babel-runtime": "^5.8.29",
-    "kisschema": "^1.0.0"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.7.5",
-    "babel-core": "^6.2.1",
-    "babel-preset-es2015": "^6.1.18"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

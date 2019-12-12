@@ -1,6 +1,16 @@
 
 import assert from 'assert'
-import km from '../src/index'
+import * as km from '../lib/index.js'
+
+function describe(txt, fn) {
+  console.log('Describing:', txt)
+  fn()
+}
+
+function it(txt, fn) {
+  console.log('It', txt)
+  fn()
+}
 
 describe('kismatch', () => {
 
@@ -8,36 +18,36 @@ describe('kismatch', () => {
 
     it ('should run function for match', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: 'bar' },
         payload => payload
       )
 
-      var good = { foo: 'bar' }
+      const good = { foo: 'bar' }
 
       assert.equal(echo(good), good)
     })
 
     it ('should return null for non-match', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: 'bar' },
         payload => payload
       )
 
-      var bad = { foo: 'baz' }
+      const bad = { foo: 'baz' }
 
       assert.equal(echo(bad), null)
     })
 
     it ('should not break when given undefined/null', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: 'bar' },
         payload => payload
       )
 
-      var bad = undefined
+      const bad = undefined
 
       assert.equal(echo(bad), null)
     })
@@ -47,24 +57,24 @@ describe('kismatch', () => {
 
     it ('should run function for match with kisschema', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.string },
         payload => payload
       )
 
-      var good = { foo: 'bar' }
+      const good = { foo: 'bar' }
 
       assert.equal(echo(good), good)
     })
 
     it ('should return null for non-match with kisschema', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.string },
         payload => payload
       )
 
-      var bad = { foo: 1 }
+      const bad = { foo: 1 }
 
       assert.equal(echo(bad), null)
     })
@@ -74,24 +84,24 @@ describe('kismatch', () => {
 
     it ('should run function for match', () => {
 
-      var echo = km(
+      const echo = km.match(
         ({ foo }) => foo === 'bar',
         payload => payload
       )
 
-      var good = { foo: 'bar' }
+      const good = { foo: 'bar' }
 
       assert.equal(echo(good), good)
     })
 
     it ('should return null for non-match', () => {
 
-      var echo = km(
+      const echo = km.match(
         ({ foo }) => foo === 'bar',
         payload => payload
       )
 
-      var bad = { foo: 'zap' }
+      const bad = { foo: 'zap' }
 
       assert.equal(echo(bad), null)
     })
@@ -101,12 +111,12 @@ describe('kismatch', () => {
 
     it ('should check both isRequired and base validation', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.string.isRequired },
         payload => payload
       )
 
-      var bad = { foo: 1 }
+      const bad = { foo: 1 }
 
       assert.equal(echo(bad), null)
     })
@@ -116,24 +126,24 @@ describe('kismatch', () => {
 
     it ('should run function when matches multiple', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.number, bar: 'baz' },
         payload => payload
       )
 
-      var good = { foo: 1, bar: 'baz' }
+      const good = { foo: 1, bar: 'baz' }
 
       assert.equal(echo(good), good)
     })
 
     it ('should return null when one of multiple matchers is non-match', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.array, bar: 'baz' },
         payload => payload
       )
 
-      var bad = { foo: 1, bar: 'baz' }
+      const bad = { foo: 1, bar: 'baz' }
 
       assert.equal(echo(bad), null)
 
@@ -141,7 +151,7 @@ describe('kismatch', () => {
 
     it ('should choose strongest match by count matched properties', () => {
 
-      var echo = km(
+      const echo = km.match(
 
         { foo: km.types.number, bar: 'baz' },
         payload => payload,
@@ -150,7 +160,7 @@ describe('kismatch', () => {
         payload => [ payload, payload ]
       )
 
-      var good = { repeat: true, foo: 1, bar: 'baz' }
+      const good = { repeat: true, foo: 1, bar: 'baz' }
 
       assert.equal(JSON.stringify(echo(good)), JSON.stringify([ good, good ]))
     })
@@ -160,7 +170,7 @@ describe('kismatch', () => {
 
     it ('should call a given default function if no other matches found', () => {
 
-      var echo = km(
+      const echo = km.match(
 
         { foo: km.types.number, bar: 'baz' },
         payload => payload,
@@ -168,7 +178,7 @@ describe('kismatch', () => {
         () => 'some default'
       )
 
-      var needsDefault = { foo: 1 }
+      const needsDefault = { foo: 1 }
 
       assert.equal(echo(needsDefault), 'some default')
     })
@@ -178,43 +188,43 @@ describe('kismatch', () => {
 
     it ('should run function when matches', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: { bar: 'baz' } },
         payload => payload
       )
 
-      var good = { foo: { bar: 'baz' } }
+      const good = { foo: { bar: 'baz' } }
 
       assert.equal(echo(good), good)
     })
 
     it ('should return null when one of multiple matchers is non-match', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: { bar: 'baz' } },
         payload => payload
       )
 
-      var bad = { foo: { bar: 1 } }
+      const bad = { foo: { bar: 1 } }
 
       assert.equal(echo(bad), null)
     })
 
     it ('should simply fail if data is not nested', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: { bar: { zap: 1 } } },
         payload => payload
       )
 
-      var bad = { foo: null }
+      const bad = { foo: null }
 
       assert.equal(echo(bad), null)
     })
 
     it ('should match for multiple nested patterns', () => {
 
-      var echo = km(
+      const echo = km.match(
         { 
           foo: { bar: 'baz' },
           zap: { pip: 1 }
@@ -222,7 +232,7 @@ describe('kismatch', () => {
         payload => payload
       )
 
-      var bad = { foo: { bar: 'baz' }, zap: {} }
+      const bad = { foo: { bar: 'baz' }, zap: {} }
 
       assert.equal(echo(bad), null)
     })
@@ -232,25 +242,25 @@ describe('kismatch', () => {
 
     it ('should call function with all given arguments!', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.string, bar: 2 },
         (...args) => args
       )
 
-      var good = { foo: 'hi', bar: 2 }
+      const good = { foo: 'hi', bar: 2 }
 
       assert.deepEqual(echo(good, 1, 2, 3, 4, 5), [ good, 1, 2, 3, 4, 5 ])
     })
 
     it ('should call default function with all given arguments', () => {
 
-      var echo = km(
+      const echo = km.match(
         { foo: km.types.string, bar: 2 },
         () => false,
         (...args) => args
       )
 
-      var good = undefined
+      const good = undefined
 
       assert.deepEqual(echo(good, 1, 2, 3, 4, 5), [ good, 1, 2, 3, 4, 5 ])
     })
